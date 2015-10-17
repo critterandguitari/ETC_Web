@@ -32,8 +32,6 @@ class Root():
         return mode
     get_mode.exposed = True
 
-    # save a new mode TODO:  check if it already exists (don't overite existing)
-    # TODO:  what to do about bad names
     def save_new(self, name, contents):
         p = name
         mode_dir = MODES_PATH+p
@@ -42,9 +40,6 @@ class Root():
         with open(mode_path, "w") as text_file:
             text_file.write(contents)
         #then send reload command
-        #TODO: need to work all this out (how modees are stored / loaded in mother program)
-        #self.send_command("setmode," + p + "\n")
-        #self.send_command("rlp\n")
         print "sending new: " + str(name)
         liblo.send(osc_target, "/new", name)
         return "SAVED " + name
