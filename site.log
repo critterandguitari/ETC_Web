@@ -6163,3 +6163,839 @@ ChannelFailures: error(98, 'Address already in use')
 [17/Oct/2015:01:19:47] ENGINE Bus EXITING
 [17/Oct/2015:01:19:47] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
 [17/Oct/2015:01:19:47] ENGINE Bus EXITED
+[10/Nov/2016:17:02:40] ENGINE Listening for SIGHUP.
+[10/Nov/2016:17:02:40] ENGINE Listening for SIGTERM.
+[10/Nov/2016:17:02:40] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:17:02:40] ENGINE Bus STARTING
+[10/Nov/2016:17:02:40] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:17:02:40] ENGINE Serving on http://0.0.0.0:8080
+[10/Nov/2016:17:02:40] ENGINE Bus STARTED
+[10/Nov/2016:17:05:36] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 90, in index
+    patch_folders = get_immediate_subdirectories('../../patches/')
+  File "cpapp.py", line 23, in get_immediate_subdirectories
+    return [name for name in os.listdir(dir)
+OSError: [Errno 2] No such file or directory: '../../patches/'
+[10/Nov/2016:17:10:54] ENGINE Listening for SIGHUP.
+[10/Nov/2016:17:10:54] ENGINE Listening for SIGTERM.
+[10/Nov/2016:17:10:54] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:17:10:54] ENGINE Bus STARTING
+[10/Nov/2016:17:10:54] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:17:10:59] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x764201b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:17:10:59] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:17:10:59] ENGINE Bus STOPPING
+[10/Nov/2016:17:10:59] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:17:10:59] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:17:10:59] ENGINE Bus STOPPED
+[10/Nov/2016:17:10:59] ENGINE Bus EXITING
+[10/Nov/2016:17:10:59] ENGINE Bus EXITED
+[10/Nov/2016:19:07:01] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:07:01] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:07:01] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:07:01] ENGINE Bus STARTING
+[10/Nov/2016:19:07:01] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:07:06] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x764241b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:19:07:06] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:19:07:06] ENGINE Bus STOPPING
+[10/Nov/2016:19:07:06] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:19:07:06] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:19:07:06] ENGINE Bus STOPPED
+[10/Nov/2016:19:07:06] ENGINE Bus EXITING
+[10/Nov/2016:19:07:06] ENGINE Bus EXITED
+[10/Nov/2016:19:07:30] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 90, in index
+    patch_folders = get_immediate_subdirectories('../../patches/')
+  File "cpapp.py", line 23, in get_immediate_subdirectories
+    return [name for name in os.listdir(dir)
+OSError: [Errno 2] No such file or directory: '../../patches/'
+[10/Nov/2016:19:14:43] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:14:43] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:14:43] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:14:43] ENGINE Bus STARTING
+[10/Nov/2016:19:14:43] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:14:43] ENGINE Serving on http://0.0.0.0:8080
+[10/Nov/2016:19:14:43] ENGINE Bus STARTED
+[10/Nov/2016:19:14:59] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:00] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:02] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:03] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:03] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:05] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:06] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:07] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:07] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:08] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:10] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:10] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:10] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:11] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:15:11] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATCH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:16:23] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:16:23] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:16:23] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:16:23] ENGINE Bus STARTING
+[10/Nov/2016:19:16:23] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:16:28] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7638a1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:19:16:28] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:19:16:28] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:16:28] ENGINE Bus STOPPING
+[10/Nov/2016:19:16:28] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:19:16:28] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:19:16:28] ENGINE Bus STOPPED
+[10/Nov/2016:19:16:28] ENGINE Bus EXITING
+[10/Nov/2016:19:16:28] ENGINE Bus EXITED
+[10/Nov/2016:19:16:29] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:16:30] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 33, in get_patch
+    patch_path = MODES_PATH+p+'/main.py'
+NameError: global name 'MODES_PATCH' is not defined
+[10/Nov/2016:19:17:45] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:17:45] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:17:45] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:17:45] ENGINE Bus STARTING
+[10/Nov/2016:19:17:45] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:17:45] ENGINE Serving on http://0.0.0.0:8080
+[10/Nov/2016:19:17:45] ENGINE Bus STARTED
+[10/Nov/2016:19:19:19] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:19:19] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:19:19] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:19:19] ENGINE Bus STARTING
+[10/Nov/2016:19:19:19] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:19:24] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x763861b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:19:19:24] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:19:19:24] ENGINE Bus STOPPING
+[10/Nov/2016:19:19:24] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:19:19:24] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:19:19:24] ENGINE Bus STOPPED
+[10/Nov/2016:19:19:24] ENGINE Bus EXITING
+[10/Nov/2016:19:19:24] ENGINE Bus EXITED
+[10/Nov/2016:19:35:41] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:35:41] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:35:41] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:35:41] ENGINE Bus STARTING
+[10/Nov/2016:19:35:41] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:35:46] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7643a1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:19:35:46] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:19:35:46] ENGINE Bus STOPPING
+[10/Nov/2016:19:35:46] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:19:35:46] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:19:35:46] ENGINE Bus STOPPED
+[10/Nov/2016:19:35:46] ENGINE Bus EXITING
+[10/Nov/2016:19:35:46] ENGINE Bus EXITED
+[10/Nov/2016:19:38:00] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:38:00] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:38:00] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:38:00] ENGINE Bus STARTING
+[10/Nov/2016:19:38:00] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:38:05] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7637a1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:19:38:05] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:19:38:05] ENGINE Bus STOPPING
+[10/Nov/2016:19:38:05] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:19:38:05] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:19:38:05] ENGINE Bus STOPPED
+[10/Nov/2016:19:38:05] ENGINE Bus EXITING
+[10/Nov/2016:19:38:06] ENGINE Bus EXITED
+[10/Nov/2016:19:38:06] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 34, in get_patch
+    patch = open(patch_path, 'r').read()
+IOError: [Errno 2] No such file or directory: '/usbdrive/Patches/notes-basic/main.py'
+[10/Nov/2016:19:38:08] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 34, in get_patch
+    patch = open(patch_path, 'r').read()
+IOError: [Errno 2] No such file or directory: '/usbdrive/Patches/notes-basic/main.py'
+[10/Nov/2016:19:38:12] HTTP 
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/usr/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 60, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "cpapp.py", line 34, in get_patch
+    patch = open(patch_path, 'r').read()
+IOError: [Errno 2] No such file or directory: '/usbdrive/Patches/notes-basic/main.py'
+[10/Nov/2016:19:39:07] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:39:07] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:39:07] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:39:07] ENGINE Bus STARTING
+[10/Nov/2016:19:39:07] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:39:12] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7645e1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:19:39:12] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:19:39:12] ENGINE Bus STOPPING
+[10/Nov/2016:19:39:12] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:19:39:12] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:19:39:12] ENGINE Bus STOPPED
+[10/Nov/2016:19:39:12] ENGINE Bus EXITING
+[10/Nov/2016:19:39:12] ENGINE Bus EXITED
+[10/Nov/2016:19:45:40] ENGINE Listening for SIGHUP.
+[10/Nov/2016:19:45:40] ENGINE Listening for SIGTERM.
+[10/Nov/2016:19:45:40] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:19:45:40] ENGINE Bus STARTING
+[10/Nov/2016:19:45:40] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:19:45:45] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x763fc1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:19:45:45] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:19:45:45] ENGINE Bus STOPPING
+[10/Nov/2016:19:45:45] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:19:45:45] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:19:45:45] ENGINE Bus STOPPED
+[10/Nov/2016:19:45:45] ENGINE Bus EXITING
+[10/Nov/2016:19:45:45] ENGINE Bus EXITED
+[10/Nov/2016:20:03:36] ENGINE Listening for SIGHUP.
+[10/Nov/2016:20:03:36] ENGINE Listening for SIGTERM.
+[10/Nov/2016:20:03:36] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:20:03:36] ENGINE Bus STARTING
+[10/Nov/2016:20:03:36] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:20:03:41] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x764401b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:20:03:42] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:20:03:42] ENGINE Bus STOPPING
+[10/Nov/2016:20:03:42] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:20:03:42] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:20:03:42] ENGINE Bus STOPPED
+[10/Nov/2016:20:03:42] ENGINE Bus EXITING
+[10/Nov/2016:20:03:42] ENGINE Bus EXITED
+[10/Nov/2016:20:11:54] ENGINE Listening for SIGHUP.
+[10/Nov/2016:20:11:54] ENGINE Listening for SIGTERM.
+[10/Nov/2016:20:11:54] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:20:11:54] ENGINE Bus STARTING
+[10/Nov/2016:20:11:54] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:20:11:59] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x763d61b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:20:11:59] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:20:11:59] ENGINE Bus STOPPING
+[10/Nov/2016:20:11:59] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:20:11:59] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:20:11:59] ENGINE Bus STOPPED
+[10/Nov/2016:20:11:59] ENGINE Bus EXITING
+[10/Nov/2016:20:11:59] ENGINE Bus EXITED
+[10/Nov/2016:20:13:11] ENGINE Listening for SIGHUP.
+[10/Nov/2016:20:13:11] ENGINE Listening for SIGTERM.
+[10/Nov/2016:20:13:11] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:20:13:11] ENGINE Bus STARTING
+[10/Nov/2016:20:13:11] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:20:13:16] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7642f1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:20:13:16] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:20:13:16] ENGINE Bus STOPPING
+[10/Nov/2016:20:13:16] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:20:13:16] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:20:13:16] ENGINE Bus STOPPED
+[10/Nov/2016:20:13:16] ENGINE Bus EXITING
+[10/Nov/2016:20:13:16] ENGINE Bus EXITED
+[10/Nov/2016:20:33:47] ENGINE Listening for SIGHUP.
+[10/Nov/2016:20:33:47] ENGINE Listening for SIGTERM.
+[10/Nov/2016:20:33:47] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:20:33:47] ENGINE Bus STARTING
+[10/Nov/2016:20:33:47] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:20:33:52] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7640c1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:20:33:52] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:20:33:52] ENGINE Bus STOPPING
+[10/Nov/2016:20:33:52] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:20:33:52] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:20:33:52] ENGINE Bus STOPPED
+[10/Nov/2016:20:33:52] ENGINE Bus EXITING
+[10/Nov/2016:20:33:52] ENGINE Bus EXITED
+[10/Nov/2016:20:34:31] ENGINE Listening for SIGHUP.
+[10/Nov/2016:20:34:31] ENGINE Listening for SIGTERM.
+[10/Nov/2016:20:34:31] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:20:34:31] ENGINE Bus STARTING
+[10/Nov/2016:20:34:31] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:20:34:36] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7637d1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:20:34:36] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:20:34:36] ENGINE Bus STOPPING
+[10/Nov/2016:20:34:36] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:20:34:36] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:20:34:36] ENGINE Bus STOPPED
+[10/Nov/2016:20:34:36] ENGINE Bus EXITING
+[10/Nov/2016:20:34:36] ENGINE Bus EXITED
+[10/Nov/2016:20:35:34] ENGINE Listening for SIGHUP.
+[10/Nov/2016:20:35:34] ENGINE Listening for SIGTERM.
+[10/Nov/2016:20:35:34] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:20:35:34] ENGINE Bus STARTING
+[10/Nov/2016:20:35:34] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:20:35:39] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7641f1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:20:35:39] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:20:35:39] ENGINE Bus STOPPING
+[10/Nov/2016:20:35:39] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:20:35:39] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:20:35:39] ENGINE Bus STOPPED
+[10/Nov/2016:20:35:39] ENGINE Bus EXITING
+[10/Nov/2016:20:35:39] ENGINE Bus EXITED
+[10/Nov/2016:20:37:47] ENGINE Listening for SIGHUP.
+[10/Nov/2016:20:37:47] ENGINE Listening for SIGTERM.
+[10/Nov/2016:20:37:47] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:20:37:47] ENGINE Bus STARTING
+[10/Nov/2016:20:37:47] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:20:37:52] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x7636e1b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:20:37:52] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:20:37:52] ENGINE Bus STOPPING
+[10/Nov/2016:20:37:52] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:20:37:52] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:20:37:52] ENGINE Bus STOPPED
+[10/Nov/2016:20:37:52] ENGINE Bus EXITING
+[10/Nov/2016:20:37:52] ENGINE Bus EXITED
+[10/Nov/2016:21:59:25] ENGINE Listening for SIGHUP.
+[10/Nov/2016:21:59:25] ENGINE Listening for SIGTERM.
+[10/Nov/2016:21:59:25] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:21:59:25] ENGINE Bus STARTING
+[10/Nov/2016:21:59:25] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:21:59:30] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x763c11b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:21:59:31] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:21:59:31] ENGINE Bus STOPPING
+[10/Nov/2016:21:59:31] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:21:59:31] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:21:59:31] ENGINE Bus STOPPED
+[10/Nov/2016:21:59:31] ENGINE Bus EXITING
+[10/Nov/2016:21:59:31] ENGINE Bus EXITED
+[10/Nov/2016:22:01:31] ENGINE Listening for SIGHUP.
+[10/Nov/2016:22:01:31] ENGINE Listening for SIGTERM.
+[10/Nov/2016:22:01:31] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:22:01:31] ENGINE Bus STARTING
+[10/Nov/2016:22:01:31] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:22:01:36] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x764061b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:22:01:36] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:22:01:36] ENGINE Bus STOPPING
+[10/Nov/2016:22:01:36] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:22:01:36] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:22:01:36] ENGINE Bus STOPPED
+[10/Nov/2016:22:01:36] ENGINE Bus EXITING
+[10/Nov/2016:22:01:36] ENGINE Bus EXITED
+[10/Nov/2016:22:24:57] ENGINE Listening for SIGHUP.
+[10/Nov/2016:22:24:57] ENGINE Listening for SIGTERM.
+[10/Nov/2016:22:24:57] ENGINE Listening for SIGUSR1.
+[10/Nov/2016:22:24:57] ENGINE Bus STARTING
+[10/Nov/2016:22:24:57] ENGINE Started monitor thread '_TimeoutMonitor'.
+[10/Nov/2016:22:25:02] ENGINE Error in 'start' listener <bound method Server.start of <cherrypy._cpserver.Server object at 0x763b11b0>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 203, in publish
+    output.append(listener(*args, **kwargs))
+  File "/usr/lib/python2.7/site-packages/cherrypy/_cpserver.py", line 168, in start
+    ServerAdapter.start(self)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 170, in start
+    wait_for_free_port(*self.bind_addr)
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/servers.py", line 438, in wait_for_free_port
+    raise IOError("Port %r not free on %r" % (port, host))
+IOError: Port 8080 not free on '0.0.0.0'
+
+[10/Nov/2016:22:25:02] ENGINE Shutting down due to error in start listener:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 241, in start
+    self.publish('start')
+  File "/usr/lib/python2.7/site-packages/cherrypy/process/wspbus.py", line 221, in publish
+    raise exc
+ChannelFailures: IOError("Port 8080 not free on '0.0.0.0'",)
+
+[10/Nov/2016:22:25:02] ENGINE Bus STOPPING
+[10/Nov/2016:22:25:02] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) already shut down
+[10/Nov/2016:22:25:02] ENGINE Stopped thread '_TimeoutMonitor'.
+[10/Nov/2016:22:25:02] ENGINE Bus STOPPED
+[10/Nov/2016:22:25:02] ENGINE Bus EXITING
+[10/Nov/2016:22:25:02] ENGINE Bus EXITED

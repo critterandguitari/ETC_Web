@@ -13,6 +13,9 @@ import socket
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
 
+GRABS_PATH = "/usbdrive/Grabs"
+MODES_PATH = "/usbdrive/Patches/"
+
 print "UDP target IP:", UDP_IP
 print "UDP target port:", UDP_PORT
 
@@ -27,7 +30,7 @@ class Root():
 
     # /patch/patch-name  loads patch
     def get_patch(self, p):
-        patch_path = '../../patches/'+p+'/'+p+'.py'
+        patch_path = MODES_PATH+p+'/main.py'
         patch = open(patch_path, 'r').read()
         self.send_command("setpatch," + p + "\n")
         return patch
@@ -42,8 +45,8 @@ class Root():
     # TODO:  what to do about bad names
     def save_new(self, name, contents):
         p = name
-        patch_dir = '../../patches/'+p
-        patch_path = '../../patches/'+p+'/'+p+'.py'
+        patch_dir = MODES_PATH+p
+        patch_path = MODES_PATH+p+'/main.py'
         if not os.path.exists(patch_dir): os.makedirs(patch_dir)
         with open(patch_path, "w") as text_file:
             text_file.write(contents)
@@ -57,7 +60,7 @@ class Root():
     def save(self, name, contents):
         #save the patch
         p = name
-        patch_path = '../../patches/'+p+'/'+p+'.py'
+        patch_path = MODES_PATH+p+'/main.py'
         with open(patch_path, "w") as text_file:
             text_file.write(contents)
         #then send reload command
@@ -68,14 +71,14 @@ class Root():
     def get_grabs(self):
         
         images = []
-        for filepath in sorted(glob.glob('../../../*.png')):
+        for filepath in sorted(glob.glob(GRABS_PATH+'*.png')):
             filename = os.path.basename(filepath)
             images.append(filename)
         return json.dumps(images)
     get_grabs.exposed = True
 
     def get_grab(self, name):
-        grab_path = '../../../'+name
+        grab_path = GRABS_PATH+name
         grab = open(grab_path, 'r').read()
         cherrypy.response.headers['Content-Type'] = "image/png"
         return grab
@@ -87,11 +90,11 @@ class Root():
         
         print "loading patches..."
         patches = []
-        patch_folders = get_immediate_subdirectories('../../patches/')
+        patch_folders = get_immediate_subdirectories(MODES_PATH)
 
         for patch_folder in patch_folders :
             patch_name = str(patch_folder)
-            patch_path = '../../patches/'+patch_name+'/'+patch_name+'.py'
+            patch_path = MODES_PATH+patch_name+'/main.py'
             patches.append(urllib.quote(patch_name))
 
         return json.dumps(patches)
