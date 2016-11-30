@@ -13,7 +13,7 @@ import socket
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
 
-GRABS_PATH = "/usbdrive/Grabs"
+GRABS_PATH = "/usbdrive/"
 MODES_PATH = "/usbdrive/Patches/"
 
 print "UDP target IP:", UDP_IP
