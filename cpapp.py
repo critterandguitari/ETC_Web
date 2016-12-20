@@ -13,7 +13,7 @@ import socket
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
 
-GRABS_PATH = "/usbdrive/"
+GRABS_PATH = "/usbdrive/Grabs/"
 MODES_PATH = "/usbdrive/Patches/"
 
 print "UDP target IP:", UDP_IP
@@ -71,7 +71,7 @@ class Root():
     def get_grabs(self):
         
         images = []
-        for filepath in sorted(glob.glob(GRABS_PATH+'*.png')):
+        for filepath in sorted(glob.glob(GRABS_PATH+'*.jpg')):
             filename = os.path.basename(filepath)
             images.append(filename)
         return json.dumps(images)
@@ -80,7 +80,7 @@ class Root():
     def get_grab(self, name):
         grab_path = GRABS_PATH+name
         grab = open(grab_path, 'r').read()
-        cherrypy.response.headers['Content-Type'] = "image/png"
+        cherrypy.response.headers['Content-Type'] = "image/jpg"
         return grab
     get_grab.exposed = True
 

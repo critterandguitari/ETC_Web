@@ -10,13 +10,17 @@
      <style type="text/css" media="screen">
 
         #menu { 
-            position: absolute;
             top:  0px;
+        }
+
+        #title { 
+            margin-top:  10px;
+            margin-left: 200px;
         }
 
         #editor { 
             position: absolute;
-            top:  75px;
+            top:  80px;
             right: 0;
             bottom: 0;
             left: 200px;
@@ -28,6 +32,8 @@
         }
         .side-button {
             cursor: pointer;
+            color : white;
+            text-decoration: none;
         }
         .side-button:hover {color:#FF00FF;}
         /* Start by setting display:none to make this hidden.
@@ -66,12 +72,12 @@
 
   </head>
   <body>
-    <div id="menu" class="side-button">
-    <a href="index.html">Editor</a>
-    <a href="grabs.html">Screen Grabs</a>
+    <div id="menu" >
+    <a class="side-button" href="index.html">Editor</a> &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <a class="side-button" href="grabs.html">Screen Grabs</a>
     </div>
 
-    <h1 id="title">!!!!!!</h1>
+    <h1 id="title"></h1>
 
     <div id="patches">
     </div>
@@ -90,24 +96,8 @@
     save new
     </div>
 
-    <div id="screengrab" class="side-button">
-    screengrab
-    </div>
-
-
-    <div id="clear-screen" class="side-button">
-    clear
-    </div>
-
-    <div id="osd-toggle" class="side-button">
-    OSD
-    </div>
 
     <br /><br /> <br />
-
-    <div id="quit" class="side-button">
-    quit
-    </div>
 
     <div id="editor">
 import cool

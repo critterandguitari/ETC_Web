@@ -2,22 +2,28 @@ ajaxURL = 'http://' + location.host
 
 //alert (ajaxURL)
 
-function getPatch(img) {
-        $("#editor").empty();
-        $("#title").html(img);
-        $("#editor").html( '<img height="360" width="640" src="' + ajaxURL + '/get_grab/' + img + '"></img>' );
+function getGrab(img) {
+        $("#big").empty();
+        $big = ( '<img height="360" width="640" src="' + ajaxURL + '/get_grab/' + img + '"></img>' );
+            
+        $("#big").append($big);
+
+        $("#big").click(function () {
+                $("#big").empty();
+         });
+
 }
 
-function getPatchList() {
+function getGrabs() {
      $.getJSON(ajaxURL + '/get_grabs', function(data) {
-        $("#patches").empty();
+        $("#grabs").empty();
         $.each(data, function (i,v) {
           
-            $patch = $('<img height="108" width="192" src="' + ajaxURL + '/get_grab/' + v + '"></img>').append(v);
-            $patch.click(function () {
-                getPatch(v);
+            $grab = $('<img height="72" width="128" src="' + ajaxURL + '/get_grab/' + v + '"></img>').append(v);
+            $grab.click(function () {
+                getGrab(v);
             });
-           $("#patches").append($patch);
+           $("#grabs").append($grab);
         });
     });
 }
@@ -25,19 +31,7 @@ function getPatchList() {
 $(document).ready(function() {
 
 
-    // this disables page while loading things 
-    $("body").on({
-        // When ajaxStart is fired, add 'loading' to body class
-        ajaxStart: function() { 
-            $(this).addClass("loading"); 
-        },
-        // When ajaxStop is fired, rmeove 'loading' from body class
-        ajaxStop: function() { 
-            $(this).removeClass("loading"); 
-        }    
-    });
-
-    getPatchList();
+    getGrabs();
 
 
 });
