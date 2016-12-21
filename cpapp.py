@@ -14,7 +14,7 @@ UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
 
 GRABS_PATH = "/usbdrive/Grabs/"
-MODES_PATH = "/usbdrive/Patches/"
+MODES_PATH = "/usbdrive/Modes/"
 
 print "UDP target IP:", UDP_IP
 print "UDP target port:", UDP_PORT
@@ -28,40 +28,40 @@ def get_immediate_subdirectories(dir) :
 
 class Root():
 
-    # /patch/patch-name  loads patch
-    def get_patch(self, p):
-        patch_path = MODES_PATH+p+'/main.py'
-        patch = open(patch_path, 'r').read()
-        self.send_command("setpatch," + p + "\n")
-        return patch
-    get_patch.exposed = True
+    # /mode/mode-name  loads mode
+    def get_mode(self, p):
+        mode_path = MODES_PATH+p+'/main.py'
+        mode = open(mode_path, 'r').read()
+        self.send_command("setmode," + p + "\n")
+        return mode
+    get_mode.exposed = True
 
     def send_command(self, data):
         global sock
         sock.sendto(data, (UDP_IP, UDP_PORT))
     send_command.exposed = True
 
-    # save a new patch TODO:  check if it already exists (don't overite existing)
+    # save a new mode TODO:  check if it already exists (don't overite existing)
     # TODO:  what to do about bad names
     def save_new(self, name, contents):
         p = name
-        patch_dir = MODES_PATH+p
-        patch_path = MODES_PATH+p+'/main.py'
-        if not os.path.exists(patch_dir): os.makedirs(patch_dir)
-        with open(patch_path, "w") as text_file:
+        mode_dir = MODES_PATH+p
+        mode_path = MODES_PATH+p+'/main.py'
+        if not os.path.exists(mode_dir): os.makedirs(mode_dir)
+        with open(mode_path, "w") as text_file:
             text_file.write(contents)
         #then send reload command
-        #TODO: need to work all this out (how patches are stored / loaded in mother program)
-        self.send_command("setpatch," + p + "\n")
+        #TODO: need to work all this out (how modees are stored / loaded in mother program)
+        self.send_command("setmode," + p + "\n")
         self.send_command("rlp\n")
         return "SAVED " + name
     save_new.exposed = True
 
     def save(self, name, contents):
-        #save the patch
+        #save the mode
         p = name
-        patch_path = MODES_PATH+p+'/main.py'
-        with open(patch_path, "w") as text_file:
+        mode_path = MODES_PATH+p+'/main.py'
+        with open(mode_path, "w") as text_file:
             text_file.write(contents)
         #then send reload command
         self.send_command("rlp\n")
@@ -85,19 +85,20 @@ class Root():
     get_grab.exposed = True
 
 
-    # returns list of all the patches
+    # returns list of all the modees
     def index(self):
         
-        print "loading patches..."
-        patches = []
-        patch_folders = get_immediate_subdirectories(MODES_PATH)
+        print "loading modees..."
+        modees = []
+        mode_folders = get_immediate_subdirectories(MODES_PATH)
 
-        for patch_folder in patch_folders :
-            patch_name = str(patch_folder)
-            patch_path = MODES_PATH+patch_name+'/main.py'
-            patches.append(urllib.quote(patch_name))
+        for mode_folder in mode_folders :
+            mode_name = str(mode_folder)
+            mode_path = MODES_PATH+mode_name+'/main.py'
+            #modees.append(urllib.quote(mode_name))
+            modees.append(mode_name)
 
-        return json.dumps(patches)
+        return json.dumps(modees)
 
     index.exposed = True
 

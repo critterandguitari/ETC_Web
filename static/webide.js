@@ -1,5 +1,5 @@
 editor = null
-currentPatch = ''
+currentmode = ''
 ajaxURL = 'http://' + location.host
 
 //alert (ajaxURL)
@@ -11,30 +11,30 @@ function sendCmd(cmd) {
     });
 }
 
-function getPatch(patch) {
-    $.get(ajaxURL + '/get_patch/' + patch, function(data) {
+function getmode(mode) {
+    $.get(ajaxURL + '/get_mode/' + mode, function(data) {
         editor.setValue(data)
         editor.gotoLine(1)
-        currentPatch = patch
-        $("#title").html(patch)
+        currentmode = mode
+        $("#title").html(mode)
     });
 }
 
-function getPatchList() {
+function getmodeList() {
      $.getJSON(ajaxURL + '', function(data) {
-        $("#patches").empty();
+        $("#modees").empty();
         $.each(data, function (i,v) {
           
-            $patch = $('<div class="side-button"></div>').append(v);
-            $patch.click(function () {
-                getPatch(v);
+            $mode = $('<div class="side-button"></div>').append(v);
+            $mode.click(function () {
+                getmode(v);
             });
-           $("#patches").append($patch);
+           $("#modees").append($mode);
         });
     });
 }
 
-function saveNewPatch() {
+function saveNewmode() {
     
     newName = prompt('Enter New Name (No Spaces!)')
 
@@ -44,15 +44,15 @@ function saveNewPatch() {
 
     $.post(ajaxURL + "/save_new", { name: newName, contents: editor.getValue() })
     .done(function(data) {
-        // reload patch list
-        getPatchList();
+        // reload mode list
+        getmodeList();
          // alert(data);
     });
 }
 
-function savePatch() {
+function savemode() {
     
-    $.post(ajaxURL + "/save", { name: currentPatch, contents: editor.getValue() })
+    $.post(ajaxURL + "/save", { name: currentmode, contents: editor.getValue() })
     .done(function(data) {
          // alert(data);
     });
@@ -79,7 +79,7 @@ $(document).ready(function() {
     editor.getSession().setMode("ace/mode/python");
     //$("#editor").style.fontSize='16px';
     document.getElementById('editor').style.fontSize='14px';
-    getPatchList();
+    getmodeList();
 
     $("#clear-screen").click(function() {
         sendCmd("cs\n");
@@ -90,7 +90,7 @@ $(document).ready(function() {
     });
 
 
-    $("#reload-patch").click(function() {
+    $("#reload-mode").click(function() {
         sendCmd("rlp\n");
     });
 
@@ -106,13 +106,13 @@ $(document).ready(function() {
 
 
     $("#save-new").click(function() {
-        saveNewPatch();
+        saveNewmode();
     });
 
 
 
     $("#save").click(function() {
-        savePatch();
+        savemode();
     });
 
 });
