@@ -5,22 +5,18 @@ import glob
 import json
 import cherrypy
 import urllib
-
-# setup UDP socket for sending data to mvp program
+import liblo
 import time
 import socket
-
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5005
 
 GRABS_PATH = "/usbdrive/Grabs/"
 MODES_PATH = "/usbdrive/Modes/"
 
-print "UDP target IP:", UDP_IP
-print "UDP target port:", UDP_PORT
-
-sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
+try:
+	osc_target = liblo.Address(4000)
+except liblo.AddressError as err:
+	print(err)
+	sys.exit()
 
 def get_immediate_subdirectories(dir) :
     return [name for name in os.listdir(dir)
@@ -32,14 +28,9 @@ class Root():
     def get_mode(self, p):
         mode_path = MODES_PATH+p+'/main.py'
         mode = open(mode_path, 'r').read()
-        self.send_command("setmode," + p + "\n")
+        liblo.send(osc_target, "/set", p)
         return mode
     get_mode.exposed = True
-
-    def send_command(self, data):
-        global sock
-        sock.sendto(data, (UDP_IP, UDP_PORT))
-    send_command.exposed = True
 
     # save a new mode TODO:  check if it already exists (don't overite existing)
     # TODO:  what to do about bad names
@@ -52,11 +43,16 @@ class Root():
             text_file.write(contents)
         #then send reload command
         #TODO: need to work all this out (how modees are stored / loaded in mother program)
-        self.send_command("setmode," + p + "\n")
-        self.send_command("rlp\n")
+        #self.send_command("setmode," + p + "\n")
+        #self.send_command("rlp\n")
         return "SAVED " + name
     save_new.exposed = True
 
+    def send_reload(self, name):
+        liblo.send(osc_target, "/reload", 1)
+        return "TEST"
+    send_reload.exposed = True
+ 
     def save(self, name, contents):
         #save the mode
         p = name
@@ -64,7 +60,7 @@ class Root():
         with open(mode_path, "w") as text_file:
             text_file.write(contents)
         #then send reload command
-        self.send_command("rlp\n")
+        liblo.send(osc_target, "/reload", 1)
         return "SAVED " + name
     save.exposed = True
    

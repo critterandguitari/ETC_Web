@@ -4,13 +4,6 @@ ajaxURL = 'http://' + location.host
 
 //alert (ajaxURL)
 
-function sendCmd(cmd) {
-    $.post(ajaxURL + "/send_command", { data: cmd })
-    .done(function(data) {
-         // alert(data);
-    });
-}
-
 function getmode(mode) {
     $.get(ajaxURL + '/get_mode/' + mode, function(data) {
         editor.setValue(data)
@@ -58,6 +51,15 @@ function savemode() {
     });
 }
 
+function sendReload() {
+    
+    //$.post(ajaxURL + "/send_reload", { name: currentmode, contents: editor.getValue() })
+    $.post(ajaxURL + "/send_reload", {name: currentmode })
+    .done(function(data) {
+         // alert(data);
+    });
+}
+
 $(document).ready(function() {
 
 
@@ -91,7 +93,7 @@ $(document).ready(function() {
 
 
     $("#reload-mode").click(function() {
-        sendCmd("rlp\n");
+        sendReload();
     });
 
 
