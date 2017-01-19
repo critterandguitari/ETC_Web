@@ -45,6 +45,8 @@ class Root():
         #TODO: need to work all this out (how modees are stored / loaded in mother program)
         #self.send_command("setmode," + p + "\n")
         #self.send_command("rlp\n")
+        print "sending new: " + str(name)
+        liblo.send(osc_target, "/new", name)
         return "SAVED " + name
     save_new.exposed = True
 
