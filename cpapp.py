@@ -8,9 +8,15 @@ import urllib
 import liblo
 import time
 import socket
+from os import listdir
+from os.path import isfile, join
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 GRABS_PATH = "/usbdrive/Grabs/"
-MODES_PATH = "/usbdrive/Modes/"
+MODES_PATH = "/sdcard/lua/"
 
 try:
 	osc_target = liblo.Address(4000)
@@ -26,38 +32,41 @@ class Root():
 
     # /mode/mode-name  loads mode
     def get_mode(self, p):
-        mode_path = MODES_PATH+p+'/main.py'
+        mode_path = MODES_PATH+p
         mode = open(mode_path, 'r').read()
-        liblo.send(osc_target, "/set", p)
+        #liblo.send(osc_target, "/set", p)
         return mode
     get_mode.exposed = True
 
     def save_new(self, name, contents):
-        p = name
-        mode_dir = MODES_PATH+p
-        mode_path = MODES_PATH+p+'/main.py'
-        if not os.path.exists(mode_dir): os.makedirs(mode_dir)
-        with open(mode_path, "w") as text_file:
-            text_file.write(contents)
-        #then send reload command
-        print "sending new: " + str(name)
-        liblo.send(osc_target, "/new", name)
-        return "SAVED " + name
+#        p = name
+ #       mode_dir = MODES_PATH+p
+ #       mode_path = MODES_PATH+p+'/main.py'
+ #       if not os.path.exists(mode_dir): os.makedirs(mode_dir)
+ #       with open(mode_path, "w") as text_file:
+ #           text_file.write(contents)
+ #       #then send reload command
+ #       print "sending new: " + str(name)
+ #       liblo.send(osc_target, "/new", name)
+ #       return "SAVED " + name
+        pass
     save_new.exposed = True
 
     def send_reload(self, name):
-        liblo.send(osc_target, "/reload", 1)
-        return "TEST"
+#        liblo.send(osc_target, "/reload", 1)
+ #       return "TEST"
+        pass
     send_reload.exposed = True
  
     def save(self, name, contents):
         #save the mode
         p = name
-        mode_path = MODES_PATH+p+'/main.py'
+        mode_path = MODES_PATH+p
         with open(mode_path, "w") as text_file:
             text_file.write(contents)
+        print contents
         #then send reload command
-        liblo.send(osc_target, "/reload", 1)
+        #liblo.send(osc_target, "/reload", 1)
         return "SAVED " + name
     save.exposed = True
    
@@ -85,9 +94,11 @@ class Root():
         modees = []
         mode_folders = get_immediate_subdirectories(MODES_PATH)
 
-        for mode_folder in mode_folders :
-            mode_name = str(mode_folder)
-            mode_path = MODES_PATH+mode_name+'/main.py'
+        files = [f for f in listdir(MODES_PATH) if isfile(join(MODES_PATH, f))]
+
+        for mode in files :
+            mode_name = str(mode)
+            mode_path = MODES_PATH+mode_name
             #modees.append(urllib.quote(mode_name))
             modees.append(mode_name)
 

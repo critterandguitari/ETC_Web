@@ -78,7 +78,7 @@ $(document).ready(function() {
         
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/merbivore_soft");
-    editor.getSession().setMode("ace/mode/python");
+    editor.getSession().setMode("ace/mode/lua");
     //$("#editor").style.fontSize='16px';
     document.getElementById('editor').style.fontSize='14px';
     getmodeList();
