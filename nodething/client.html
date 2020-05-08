@@ -2,8 +2,14 @@
 <html>
 <head>
   <title>WebSocket Playground</title>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
+<pre>
+<div id="vconsole" style="height:360px;border:1px solid #ccc; overflow:auto;">
+</pre>
+
 </body>
 <script>
 const ws = new WebSocket('ws://organellex.local:9898/');
@@ -12,7 +18,10 @@ ws.onopen = function() {
 	ws.send('Hi this is web client.');
 };
 ws.onmessage = function(e) {
-  console.log("Received: '" + e.data + "'");
+  //console.log("Received: '" + e.data + "'");
+  $("#vconsole").append(e.data);
+  $("#vconsole").append("\n");
+  $('#vconsole').scrollTop($('#vconsole')[0].scrollHeight);
 };
 </script>
 </html>

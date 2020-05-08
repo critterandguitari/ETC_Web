@@ -12,7 +12,7 @@ const wsServer = new WebSocketServer({
 });
 
 Tail = require('tail').Tail;
-tail = new Tail("testtail.txt");
+tail = new Tail("/tmp/video.log");
 
 wsServer.on('request', function(request) {
     const connection = request.accept(null, request.origin);
@@ -20,10 +20,10 @@ wsServer.on('request', function(request) {
 	console.log('Received Message:', message.utf8Data);
 	connection.sendUTF('Hi this is WebSocket server!');
 	
-    const interval = setInterval(function ping() {
-	    console.log('sending to browser');
-	    connection.sendUTF('Hi stuff from server');
-    }, 1000);
+//    const interval = setInterval(function ping() {
+//	    console.log('sending to browser');
+//	    connection.sendUTF('Hi stuff from server');
+//    }, 1000);
      
     tail.on("line", function(data) {
       //console.log(data);
