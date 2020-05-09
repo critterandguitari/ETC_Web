@@ -2,8 +2,6 @@ editor = null
 currentmode = ''
 ajaxURL = 'http://' + location.host
 
-//alert (ajaxURL)
-
 function getmode(mode) {
     $.get(ajaxURL + '/get_mode/' + mode, function(data) {
         editor.setValue(data)
@@ -62,7 +60,6 @@ function sendReload() {
 
 $(document).ready(function() {
 
-
     // this disables page while loading things 
     $("body").on({
         // When ajaxStart is fired, add 'loading' to body class
@@ -74,7 +71,6 @@ $(document).ready(function() {
             $(this).removeClass("loading"); 
         }    
     });
-
         
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/merbivore_soft");
@@ -91,11 +87,9 @@ $(document).ready(function() {
         sendCmd("screengrab\n");
     });
 
-
     $("#reload-mode").click(function() {
         sendReload();
     });
-
 
     $("#osd-toggle").click(function() {
         sendCmd("osd\n");
@@ -105,13 +99,9 @@ $(document).ready(function() {
         sendCmd("quit\n");
     });
 
-
-
     $("#save-new").click(function() {
         saveNewmode();
     });
-
-
 
     $("#save").click(function() {
         savemode();

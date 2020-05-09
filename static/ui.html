@@ -17,15 +17,31 @@
             margin-top:  10px;
             margin-left: 200px;
         }
-
-        #editor { 
-            position: absolute;
-            top:  80px;
-            right: 0;
-            bottom: 0;
-            left: 200px;
+         
+        #left-col {
+            float: left;
+            border:1px solid #00F; 
         }
+        #modees {
+        }
+        #vconsole-container { 
+            border:1px solid #F00; 
+            overflow:auto;
+            height: 25%;
+        }
+        #editor { 
+            border:1px solid #0F0; 
+            height: 75%;
+            overflow:auto;
+        }
+        #editor-container { 
+            border:1px solid #FF0; 
+            height: 100%;
+            margin-left:200px;
+        }
+
         body {
+            height: 98vh; 
             background-color: black;
             color : white;
             font-family:Arial, Helvetica, sans-serif;
@@ -72,34 +88,27 @@
 
   </head>
   <body>
-    <div id="menu" >
+    <!--div id="menu" >
     <a class="side-button" href="index.html">Editor</a> &nbsp;&nbsp; | &nbsp;&nbsp; 
+    </div-->
+
+    <!--h1 id="title"></h1-->
+
+    <div id="left-col">
+        <div id="modees">
+        </div>
+        <div id="save" class="side-button">
+            save
+        </div>
     </div>
 
-    <h1 id="title"></h1>
-
-    <div id="modees">
+    <div id="editor-container">
+        <div id="editor">
+            import cool
+        </div>
+        <div id="vconsole-container" > <pre id="vconsole"></pre></div>
     </div>
-    <br />
-
-
-
-    <div id="save" class="side-button">
-    save
-    </div>
-
-
-
-    <br /><br /> <br />
-
-    <div id="editor">
-import cool
-    </div>
-<pre>
-<div id="vconsole" style="border:1px solid #ccc; overflow:auto;">
-</pre>
-
-
+    
 <script>
 const ws = new WebSocket('ws://organellex.local:9898/');
 ws.onopen = function() {
@@ -110,7 +119,7 @@ ws.onmessage = function(e) {
   //console.log("Received: '" + e.data + "'");
   $("#vconsole").append(e.data);
   $("#vconsole").append("\n");
-  $('#vconsole').scrollTop($('#vconsole')[0].scrollHeight);
+  $('#vconsole-container').scrollTop($('#vconsole-container')[0].scrollHeight);
 };
 </script>
 
