@@ -20,28 +20,36 @@
          
         #left-col {
             float: left;
-            border:1px solid #00F; 
+            padding-top: 4px;
+            width: 190px;
+            /*border:1px solid #00F; */
+            background-color: #222;
+            height: 100%;
         }
         #modees {
         }
         #vconsole-container { 
-            border:1px solid #F00; 
+           /* border:1px solid #F00; */
             overflow:auto;
-            height: 25%;
+            height: calc(25% - 10px);
+            margin-top:  10px;
+            background-color: #222;
+            padding-top: 4px;
         }
         #editor { 
-            border:1px solid #0F0; 
+           /* border:1px solid #0F0; */
             height: 75%;
             overflow:auto;
+            height: 75%;
         }
         #editor-container { 
-            border:1px solid #FF0; 
+           /* border:1px solid #FF0; */
             height: 100%;
             margin-left:200px;
         }
 
         body {
-            height: 98vh; 
+            height: calc(100vh - 20px); 
             background-color: black;
             color : white;
             font-family:Arial, Helvetica, sans-serif;
