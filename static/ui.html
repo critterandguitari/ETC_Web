@@ -14,8 +14,9 @@
         }
 
         #title { 
-            margin-top:  10px;
-            margin-left: 200px;
+            height: 32px;
+            padding: 4px;
+            border:1px solid #CCC; 
         }
          
         #left-col {
@@ -32,18 +33,18 @@
            /* border:1px solid #F00; */
             overflow:auto;
             height: calc(25% - 10px);
-            margin-top:  10px;
             background-color: #222;
             padding-top: 4px;
         }
-        #editor { 
-           /* border:1px solid #0F0; */
-            height: 75%;
-            overflow:auto;
+        #editor-container { 
+            /*border:1px solid #0F0; */
             height: 75%;
         }
-        #editor-container { 
-           /* border:1px solid #FF0; */
+        #editor {
+            overflow:auto;
+            height: calc(100% - 32px); 
+        }
+        #right-col { 
             height: 100%;
             margin-left:200px;
         }
@@ -110,9 +111,11 @@
         </div>
     </div>
 
-    <div id="editor-container">
-        <div id="editor">
-            import cool
+    <div id="right-col">
+        <div id="editor-container">
+            <span id="title"></span>
+            <div id="editor">
+            </div>
         </div>
         <div id="vconsole-container" > <pre id="vconsole"></pre></div>
     </div>
