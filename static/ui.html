@@ -14,27 +14,29 @@
         }
 
         #title { 
-            height: 32px;
+            /*height: 32px;
             padding: 4px;
-            border:1px solid #CCC; 
+            background-color: #222;*/
         }
          
         #left-col {
             float: left;
             padding-top: 4px;
-            width: 190px;
+            padding-left: 4px;
+            width: 186px;
             /*border:1px solid #00F; */
             background-color: #222;
-            height: 100%;
+            overflow: auto;
+            height: calc(100% - 4px);
         }
         #modees {
         }
         #vconsole-container { 
            /* border:1px solid #F00; */
             overflow:auto;
-            height: calc(25% - 10px);
+            /*height: calc(25% - 10px);*/
+            height: 25%;
             background-color: #222;
-            padding-top: 4px;
         }
         #editor-container { 
             /*border:1px solid #0F0; */
@@ -42,7 +44,7 @@
         }
         #editor {
             overflow:auto;
-            height: calc(100% - 32px); 
+            height: calc(100% - 10px); 
         }
         #right-col { 
             height: 100%;
@@ -103,17 +105,15 @@
 
     <!--h1 id="title"></h1-->
 
-    <div id="left-col">
+    <div id="left-col">    
+        <span id="title"></span>
+        <div id="save" class="side-button"> save </div>
         <div id="modees">
-        </div>
-        <div id="save" class="side-button">
-            save
         </div>
     </div>
 
     <div id="right-col">
         <div id="editor-container">
-            <span id="title"></span>
             <div id="editor">
             </div>
         </div>
