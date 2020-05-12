@@ -10,13 +10,19 @@ import time
 import socket
 from os import listdir
 from os.path import isfile, join
+import imp
 
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+file_operations = imp.load_source('file_operations', current_dir + '/file_operations.py')
+
+
 GRABS_PATH = "/usbdrive/Grabs/"
-MODES_PATH = "/sdcard/lua/"
+MODES_PATH = "/"
 
 try:
 	osc_target = liblo.Address(4000)
@@ -30,13 +36,13 @@ def get_immediate_subdirectories(dir) :
 
 class Root():
 
-    # /mode/mode-name  loads mode
-    def get_mode(self, p):
-        mode_path = MODES_PATH+p
+    # loads a file
+    def get_file(self, fpath):
+        mode_path = MODES_PATH+fpath
         mode = open(mode_path, 'r').read()
         #liblo.send(osc_target, "/set", p)
         return mode
-    get_mode.exposed = True
+    get_file.exposed = True
 
     def save_new(self, name, contents):
 #        p = name
@@ -105,5 +111,90 @@ class Root():
         return json.dumps(modees)
 
     index.exposed = True
+
+    def tester(self, name):
+        return "TESTdf"
+        print "cool"
+    tester.exposed = True
+
+    def flash(self):
+        os.system("oscsend localhost 4001 /led/flash i 4")
+        return "done"
+    flash.exposed = True
+
+    def resync(self):
+        os.system("oscsend localhost 4001 /reload i 1")
+        return "done"
+    resync.exposed = True
+
+    def media(self, fpath, cb):
+        cherrypy.response.headers['Cache-Control'] = "no-cache, no-store, must-revalidate"
+        cherrypy.response.headers['Pragma'] = "no-cache"
+        cherrypy.response.headers['Expires'] = "0"
+        src = file_operations.BASE_DIR + fpath
+        return static.serve_file(src)
+    media.exposed = True
+
+    def download(self, fpath, cb):
+        src = file_operations.BASE_DIR + fpath
+        dl = open(src, 'r').read()
+        fname = os.path.basename(fpath)
+        cherrypy.response.headers['content-type']        = 'application/octet-stream'
+        cherrypy.response.headers['content-disposition'] = 'attachment; filename={}'.format(fname)
+        return dl
+    download.exposed = True
+
+    @cherrypy.config(**{'response.timeout': 3600}) # for large file
+    def upload(self, dst, **fdata):
+        upload = fdata['files[]']
+        folder = dst
+        filename = upload.filename
+        size = 0
+        filepath = file_operations.BASE_DIR + folder + '/' + filename 
+        filepath = file_operations.check_and_inc_name(filepath)
+        with open(filepath, 'wb') as newfile:
+            while True:
+                data = upload.file.read(8192)
+                if not data:
+                    break
+                size += len(data)
+                newfile.write(data)
+        print "saved file, size: " + str(size)
+        p, ext = os.path.splitext(filepath)
+        cherrypy.response.headers['Content-Type'] = "application/json"
+        return '{"files":[{"name":"x","size":'+str(size)+',"url":"na","thumbnailUrl":"na","deleteUrl":"na","deleteType":"DELETE"}]}'
+        
+    upload.exposed = True
+  
+    def fmdata(self, **data):
+        print "data op request" 
+        ret = ''
+        if 'operation' in data :
+            cherrypy.response.headers['Content-Type'] = "application/json"
+            if data['operation'] == 'get_node' :
+                return file_operations.get_node(data['path'])
+            if data['operation'] == 'create_node' :
+                return file_operations.create(data['path'], data['name'])
+            if data['operation'] == 'rename_node' :
+                return file_operations.rename(data['path'], data['name'])
+            if data['operation'] == 'delete_node' :
+                return file_operations.delete(data['path'])
+            if data['operation'] == 'move_node' :
+                return file_operations.move(data['src'], data['dst'])
+            if data['operation'] == 'copy_node' :
+                return file_operations.copy(data['src'], data['dst'])
+            if data['operation'] == 'unzip_node' :
+                return file_operations.unzip(data['path'])
+            if data['operation'] == 'download_node' :
+                return file_operations.download(data['path'])
+            if data['operation'] == 'zip_node' :
+                return file_operations.zip(data['path'])
+              
+        else :
+            cherrypy.response.headers['Content-Type'] = "application/json"
+            return "no operation specified"
+
+    fmdata.exposed = True
+
 
 

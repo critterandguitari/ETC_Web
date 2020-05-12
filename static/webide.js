@@ -2,28 +2,16 @@ editor = null
 currentmode = ''
 ajaxURL = 'http://' + location.host
 
-function getmode(mode) {
-    $.get(ajaxURL + '/get_mode/' + mode, function(data) {
+function getFile(fpath) {
+
+    $.get(ajaxURL + '/get_file/?fpath='+encodeURIComponent(fpath), function(data) {
         editor.setValue(data)
         editor.gotoLine(1)
-        currentmode = mode
-        $("#title").html(mode)
+        currentmode = fpath
+        $("#title").html(fpath)
     });
 }
 
-function getmodeList() {
-     $.getJSON(ajaxURL + '', function(data) {
-        $("#modees").empty();
-        $.each(data, function (i,v) {
-          
-            $mode = $('<div class="side-button"></div>').append(v);
-            $mode.click(function () {
-                getmode(v);
-            });
-           $("#modees").append($mode);
-        });
-    });
-}
 
 function saveNewmode() {
     
@@ -36,7 +24,6 @@ function saveNewmode() {
     $.post(ajaxURL + "/save_new", { name: newName, contents: editor.getValue() })
     .done(function(data) {
         // reload mode list
-        getmodeList();
          // alert(data);
     });
 }
@@ -77,7 +64,6 @@ $(document).ready(function() {
     editor.getSession().setMode("ace/mode/lua");
     //$("#editor").style.fontSize='16px';
     document.getElementById('editor').style.fontSize='14px';
-    getmodeList();
 
     $("#clear-screen").click(function() {
         sendCmd("cs\n");
