@@ -48,15 +48,28 @@ function sendReload() {
 $(document).ready(function() {
 
     // this disables page while loading things 
-    $("body").on({
+/*    $("body").on({
         // When ajaxStart is fired, add 'loading' to body class
         ajaxStart: function() { 
-            $(this).addClass("loading"); 
+            $(this).addClass("loading");
+            console.log("ajax start")
         },
         // When ajaxStop is fired, rmeove 'loading' from body class
         ajaxStop: function() { 
             $(this).removeClass("loading"); 
+            console.log("ajax stop")
         }    
+    });*/
+ 
+    // this disables page while loading things 
+    $(document).ajaxStart (function() { 
+            $('body').addClass("loading");
+            console.log("ajax start")
+    });
+        // When ajaxStop is fired, rmeove 'loading' from body class
+    $(document).ajaxStop (function() { 
+            $('body').removeClass("loading"); 
+            console.log("ajax stop");        
     });
         
     editor = ace.edit("editor");
