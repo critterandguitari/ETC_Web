@@ -64,9 +64,9 @@ class Root():
         pass
     send_reload.exposed = True
  
-    def save(self, name, contents):
+    def save(self, fpath, contents):
         #save the mode
-        p = name
+        p = fpath
         mode_path = MODES_PATH+p
         with open(mode_path, "w") as text_file:
             text_file.write(contents)

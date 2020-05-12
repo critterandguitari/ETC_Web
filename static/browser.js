@@ -81,19 +81,19 @@ function renderFilesTable(d){
         var sizeType = 'Folder'  // display size or Folder for folder
         if (c.type == 'folder'){
             sizeType = 'Folder'
-            var trow = $('<tr class="fsdir">');
-            var tdata = $('<td class="fsdirname"><span class="gspacer" /></td>');
+            var trow = $('<tr class="">');
+            var tdata = $('<td class="fsdirname fsdir"><span class="gspacer" /></td>');
             tdata.append(nodeNameWithIcon(c.path, c.type));
         } else {
             sizeType = c.size;
-            var trow = $('<tr class="fsfile">');
-            var tdata = $('<td class="fsfilename">');
+            var trow = $('<tr class="">');
+            var tdata = $('<td class="fsfilename fsfile">');
             var dlButton = $('<a class="dl-but" href="'+appBaseURL+'/download?fpath='+encodeURIComponent(c.path)+'&cb=cool"><span class="glyphicon glyphicon-download-alt"></span></a>');
             tdata.append(dlButton);
             tdata.append(nodeNameWithIcon(c.path, c.type));
         }
-        trow.data("path", c.path);
-        trow.data("type", c.type);
+        tdata.data("path", c.path);
+        tdata.data("type", c.type);
         var checkbox = $('<td><div class="checkbox ff-select"><input type="checkbox" value=""></div></td>');
         trow.append(checkbox);
         trow.append(tdata);
@@ -124,29 +124,7 @@ function renderBreadcrumb () {
     });
 }
 
-// adjust for scrollable file table
-function SetHeight(){
-    //var h = $(window).height();
-    //$("#files-table").height(h-200);   
-}
-
-$(window).resize(SetHeight);
-
-$(document).ajaxStart(function(){
-	$.LoadingOverlay("show", {
-    	fade  : [50, 50],
-        color : "rgba(255, 255, 255, 0)",
-        //image : "./assets/spinner.gif"
-	});
-});
-$(document).ajaxStop(function(){
-    $.LoadingOverlay("hide");
-});
-
 $(function () {
-
-	$(document).ready(SetHeight);
-	$(window).resize(SetHeight);
     
     // button actions
     $("#resync-but").click(function(){

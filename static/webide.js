@@ -30,7 +30,7 @@ function saveNewmode() {
 
 function savemode() {
     
-    $.post(ajaxURL + "/save", { name: currentmode, contents: editor.getValue() })
+    $.post(ajaxURL + "/save", { fpath: currentmode, contents: editor.getValue() })
     .done(function(data) {
          // alert(data);
     });
