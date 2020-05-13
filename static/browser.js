@@ -125,18 +125,13 @@ function renderBreadcrumb () {
 }
 
 $(function () {
-    
-    // button actions
-    $("#resync-but").click(function(){
-        $.get(appBaseURL+'/resync')
-        .done(function (d) {
-            console.log('resync done');
-        })
-        .fail(function () {
-            console.log('problem with resync');
-        });
+
+
+    $("#modal-close-but").click(function(){
+        $('body').removeClass("dialog");
     });
 
+    // button actions
     $("#flash-but").click(function(){
         $.get(appBaseURL+'/flash')
         .done(function (d) {
@@ -210,6 +205,7 @@ $(function () {
 
 
     $("#rename-but").click(function(){
+        $('body').addClass("dialog");
         var selectedNodes = getSelectedNodes();
         if (selectedNodes.length == 1) {
             var path = selectedNodes[0].path;
