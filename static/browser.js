@@ -5,12 +5,6 @@ var workingDir = '/sdcard/';
 var baseDirLabel = 'SD Card';
 var clipboard = {};
 
-function alertDialog(msg){
-    $('#info-modal').modal({backdrop: false});
-    $('#info-modal-msg').empty();   
-    $('#info-modal-msg').append('<p>'+msg+'</p>');   
-}
-
 function refreshWorkingDir(){
     $.get(fsurl+'?operation=get_node', { 'path' : workingDir})
     .done(function (d) {
@@ -124,12 +118,42 @@ function renderBreadcrumb () {
     });
 }
 
+// init the modal dialog with title
+function newModal(title){
+    $('#modal-dialog-contents').empty();
+    $('#modal-dialog-contents').append('<div id="modal-dialog-title">'+title+'</div>');
+    $('#modal-dialog-contents').append('<div id="modal-dialog-body"></div>');
+}
+
+// add to the modal body
+function addModalBody(stuff){
+    $('#modal-dialog-body').append(stuff);
+}
+
+// add button to the modal
+function addModalButton(name, callback){
+    button = $('<div id="modal-button-'+name+'"class="modal-button">'+name+'</div>').click(callback);
+    $('#modal-dialog-contents').append(button);
+}
+
+function showModal(){
+    // for the buttons floating left
+    $('#modal-dialog-contents').append('<div style="clear:both"></div>');
+    $('body').addClass("dialog");
+}
+
+function hideModal(){
+    $('body').removeClass("dialog");
+}
+
+function alertDialog(msg){
+    newModal('Atención');
+    addModalBody('<p>'+msg+'</p>');
+    addModalButton('Cancel', hideModal);
+    showModal();
+}
+
 $(function () {
-
-
-    $("#modal-close-but").click(function(){
-        $('body').removeClass("dialog");
-    });
 
     // button actions
     $("#flash-but").click(function(){
@@ -252,103 +276,89 @@ $(function () {
         var selectedNodes = clipboard.nodes;
         if (clipboard.nodes && clipboard.nodes.length > 0 ){
             if (clipboard.operation == "copy") {
-                $('#copy-modal').modal({backdrop: false});
-                $('#copy-modal-msg').empty();   
-                $('#copy-modal-msg').append('<p>Paste files: </p>');   
+                newModal('Copy');
+                addModalBody('<p>Paste files: </p>');   
                 selectedNodes.forEach(function(n) {
-                    $('#copy-modal-msg').append('<p>').append(nodeNameWithIcon(n.path,n.type));   
+                    addModalBody($('<p>').append(nodeNameWithIcon(n.path,n.type)));   
                 });       
-                $('#copy-modal-msg').append('<p> <br /> to current folder?</p>');   
+                addModalBody('<p> <br /> to current folder?</p>');   
+                addModalButton('Cancel', hideModal)
+                addModalButton('Paste', function(){
+                    hideModal();
+                    var selectedNodes = clipboard.nodes;
+                    selectedNodes.forEach(function(n) {
+                        $.get(fsurl+'?operation=copy_node', { 'src' : n.path, 'dst' : workingDir })
+                        .done(function () {
+                            console.log('copied 1');
+                            refreshWorkingDir();
+                        })
+                        .fail(function () {
+                            console.log('problem copying');
+                        });
+                    });
+                    clipboard = {};
+                });
+                showModal();
             }
             else if (clipboard.operation == "cut") {
-                $('#move-modal').modal({backdrop: false});
-                $('#move-modal-msg').empty();   
-                $('#move-modal-msg').append('<p>Move files: </p>');   
+                newModal('Move');
+                addModalBody('<p>Move files: </p>');   
                 selectedNodes.forEach(function(n) {
-                    $('#move-modal-msg').append('<p>').append(nodeNameWithIcon(n.path,n.type));  
+                    addModalBody($('<p>').append(nodeNameWithIcon(n.path,n.type)));  
                 });       
-                $('#move-modal-msg').append('<p> <br />to current folder?</p>');   
+                addModalBody('<p> <br />to current folder?</p>');  
+                addModalButton('Cancel', hideModal);
+                addModalButton('Move',  function(){
+                    hideModal();
+                    var selectedNodes = clipboard.nodes;
+                    selectedNodes.forEach(function(n) {
+                        $.get(fsurl+'?operation=move_node', { 'src' : n.path, 'dst' : workingDir })
+                        .done(function () {
+                            console.log('moved 1');
+                            refreshWorkingDir();
+                        })
+                        .fail(function () {
+                            console.log('problem moving');
+                        });
+                    });
+                    clipboard = {};
+                });
+                showModal();
             }
         }
         else {
-            $('#info-modal').modal({backdrop: false});
-            $('#info-modal-msg').empty();   
-            $('#info-modal-msg').append('<p>Choose files then select Copy or Cut to move.</p>');   
+            alertDialog('<p>Choose files then select Copy or Cut to move.</p>');   
         }
     });
-
-    $("#confirm-move").click(function(){
-      
-        $('#move-modal').modal('hide');
-        var selectedNodes = clipboard.nodes;
-        selectedNodes.forEach(function(n) {
-            $.get(fsurl+'?operation=move_node', { 'src' : n.path, 'dst' : workingDir })
-            .done(function () {
-                console.log('moved 1');
-				refreshWorkingDir();
-            })
-            .fail(function () {
-                console.log('problem moving');
-            });
-        });
-        clipboard = {};
-    });
-
-    $("#confirm-copy").click(function(){
-        $('#copy-modal').modal('hide');
-        var selectedNodes = clipboard.nodes;
-        selectedNodes.forEach(function(n) {
-            $.get(fsurl+'?operation=copy_node', { 'src' : n.path, 'dst' : workingDir })
-            .done(function () {
-                console.log('copied 1');
-        		refreshWorkingDir();
-            })
-            .fail(function () {
-                console.log('problem copying');
-            });
-        });
-        clipboard = {};
-    });
-
+   
     $("#delete-but").click(function(){
-        var selectedNodes = getSelectedNodes();
-/*
-        $('#del-node-list').empty();
-        $('#del-modal').modal({backdrop: false});
+        var selectedNodes = getSelectedNodes(); 
+        
+        newModal('Delete');
+        addModalBody('Permanantally remove these files?');
+        
         selectedNodes.forEach(function(n) {
-            $('#del-node-list').append('<p>').append(nodeNameWithIcon(n.path,n.type));   
-        });*/
-
-
-        $('#modal-dialog-contents').empty();
-        $('#modal-dialog-contents').append('<div id="modal-dialog-title">Delete</div>');
-        $('#modal-dialog-contents').append('<div id="modal-dialog-body">Permanantally remove these files?</div>');
-        selectedNodes.forEach(function(n) {
-            $('#modal-dialog-body').append('<p>').append(nodeNameWithIcon(n.path,n.type));   
+            addModalBody($('<p>').append(nodeNameWithIcon(n.path,n.type)));   
         });
-        $('#modal-dialog-contents').append('<div  id="modal-close-but" class="modal-button">Cancel</div>');    
-        $("#modal-close-but").click(function(){
-            $('body').removeClass("dialog");
-        });
-        $('#modal-dialog-contents').append('<div style="clear:both"></div>');
-        $('body').addClass("dialog");
 
-    });
-
-    $("#confirm-delete").click(function(){
-        $('#del-modal').modal('hide');
-        var selectedNodes = getSelectedNodes();
-        selectedNodes.forEach(function(n) {
-            $.get(fsurl+'?operation=delete_node', { 'path' : n.path })
-            .done(function () {
-                console.log('deleted 1');
-        		refreshWorkingDir();
-            })
-            .fail(function () {
-                console.log('problem deleting');
+        addModalButton('Cancel', hideModal);
+        addModalButton('Delete', function(){
+            hideModal();
+            var selectedNodes = getSelectedNodes();
+            selectedNodes.forEach(function(n) {
+                $.get(fsurl+'?operation=delete_node', { 'path' : n.path })
+                .done(function () {
+                    console.log('deleted 1');
+        		    refreshWorkingDir();
+                })
+                .fail(function () {
+                    console.log('problem deleting');
+                });
             });
         });
+        showModal();
     });
+
 
     $("#zip-but").click(function(){
         var selectedNodes = getSelectedNodes();
@@ -356,33 +366,30 @@ $(function () {
         if (selectedNodes.length == 1) {
             var path = selectedNodes[0].path;
             var basename = path.split('/').pop();
-
             if (selectedNodes[0].type == 'folder') {
                 gotaZip = true;
-                $('#zip-modal').modal({backdrop: false});
-                $('#zip-modal-msg').empty();   
-                $('#zip-modal-msg').append('<p>Zip <b>'+basename+'?</b></p>');   
+                newModal('Zip Folder');
+                addModalBody('<p>Zip <b>'+basename+'?</b></p>');   
+                addModalButton('Cancel', hideModal)
+                addModalButton('Zip', function(){
+                    hideModal();
+                    var selectedNodes = getSelectedNodes();
+                    n = selectedNodes[0];
+                    $.get(fsurl+'?operation=zip_node', { 'path' : n.path })
+                    .done(function () {
+                        console.log('zipped 1');
+                        refreshWorkingDir();
+                    })
+                    .fail(function () {
+                        console.log('problem zipping');
+                    });
+                });
+                showModal();
             }
         } 
         if (!gotaZip){
-            $('#info-modal').modal({backdrop: false});
-            $('#info-modal-msg').empty();   
-            $('#info-modal-msg').append('<p>Choose one folder to zip.</p>');   
+            alertDialog('<p>Choose one folder to zip.</p>');   
         }
-    });
-
-    $("#confirm-zip").click(function(){
-        $('#zip-modal').modal('hide');
-        var selectedNodes = getSelectedNodes();
-        n = selectedNodes[0];
-		$.get(fsurl+'?operation=zip_node', { 'path' : n.path })
-        .done(function () {
-            console.log('zipped 1');
-        	refreshWorkingDir();
-        })
-        .fail(function () {
-            console.log('problem zipping');
-        });
     });
 
     $("#unzip-but").click(function(){
@@ -395,31 +402,30 @@ $(function () {
 
             if (extension == 'zip') {
                 gotaZip = true;
-                $('#unzip-modal').modal({backdrop: false});
-                $('#unzip-modal-msg').empty();   
-                $('#unzip-modal-msg').append('<p>Unzip <b>'+basename+'</b> into current folder?</p>');   
+                newModal('Unzip');
+                addModalBody('<p>Unzip <b>'+basename+'</b> into current folder?</p>');   
+                addModalButton('Cancel', hideModal)
+                addModalButton('Unzip', function(){
+                    hideModal();
+                    var selectedNodes = getSelectedNodes();
+                    n = selectedNodes[0];
+                    $.get(fsurl+'?operation=unzip_node', { 'path' : n.path })
+                    .done(function () {
+                        console.log('unzipped 1 going to refresh');
+                        refreshWorkingDir();
+                    })
+                    .fail(function () {
+                        console.log('problem unzipping');
+                    });
+                });
+                showModal();
             }
         } 
         if (!gotaZip){
-            $('#info-modal').modal({backdrop: false});
-            $('#info-modal-msg').empty();   
-            $('#info-modal-msg').append('<p>Choose one .zip file to unzip.</p>');   
+            alertDialog('<p>Choose one .zip file to unzip.</p>');   
         }
     });
 
-    $("#confirm-unzip").click(function(){
-        $('#unzip-modal').modal('hide');
-        var selectedNodes = getSelectedNodes();
-        n = selectedNodes[0];
-        $.get(fsurl+'?operation=unzip_node', { 'path' : n.path })
-        .done(function () {
- 	        console.log('unzipped 1 going to refresh');
-        	refreshWorkingDir();
-        })
-        .fail(function () {
-            console.log('problem unzipping');
-        });
-    });
 
     // click on directory table row, excluding input elements
     $('body').on('click', '.fsdir', function(event) {
