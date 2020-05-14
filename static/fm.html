@@ -137,19 +137,23 @@
             width:      100%;
             background: rgba( 255, 255, 255, .25 ) ;
         }
-        .modal-dialog-contents {
-            width: 400px;
-            height: 200px;
+        #modal-dialog-contents {
             margin: auto;
-			position: absolute;
-			top:0;
-			bottom: 0;
-			left: 0;
-			right: 0;
 			padding: 8px;
+            max-width:500px;
+            margin-top: 32px;
             background-color: #222;
+            border:1px solid #ccc; 
         }
-
+        #modal-dialog-title {
+            margin-bottom: 10px;
+            background-color: #333;
+            font-weight: bold;
+            padding:4px;
+        }
+        #modal-dialog-body {
+            margin-bottom: 10px;
+        }
         .modal-button {
             cursor: pointer;
             text-decoration: none;
@@ -157,6 +161,7 @@
             padding: 4px;
             margin: 2px;
             overflow: hidden;
+            float:left;
         }
         .modal-button:hover {background-color:#666;}
 
@@ -250,10 +255,13 @@
 
     <div class="modal"><!-- Place at bottom of page --></div>
     <div class="modal-dialog">
-        <div class="modal-dialog-contents">
-            <div class="modal-dialog-title">Delete</div>
-            <div class="modal-dialog-body">Are you sure you want to remove these files?</div>
+        <div id="modal-dialog-contents">
+            <div id="modal-dialog-title">TITLE Goes HERE</div>
+            <div id="modal-dialog-body">Body COCOCOCOCO fofodoodofo</div>
             <div  id="modal-close-but" class="modal-button">Cancel</div>
+            <div  id="" class="modal-button">Yup!</div>
+            <div  id="" class="modal-button">U Decide</div>
+            <div style="clear:both"></div>
         </div>
     </div>
 		

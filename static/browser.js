@@ -81,19 +81,19 @@ function renderFilesTable(d){
         var sizeType = 'Folder'  // display size or Folder for folder
         if (c.type == 'folder'){
             sizeType = 'Folder'
-            var trow = $('<tr class="">');
-            var tdata = $('<td class="fsdirname fsdir"><span class="gspacer" /></td>');
+            var trow = $('<tr class="fsdir">');
+            var tdata = $('<td class="fsdirname"><span class="gspacer" /></td>');
             tdata.append(nodeNameWithIcon(c.path, c.type));
         } else {
             sizeType = c.size;
-            var trow = $('<tr class="">');
-            var tdata = $('<td class="fsfilename fsfile">');
+            var trow = $('<tr class="fsfile">');
+            var tdata = $('<td class="fsfilename">');
             var dlButton = $('<a class="dl-but" href="'+appBaseURL+'/download?fpath='+encodeURIComponent(c.path)+'&cb=cool"><span class="glyphicon glyphicon-download-alt"></span></a>');
             tdata.append(dlButton);
             tdata.append(nodeNameWithIcon(c.path, c.type));
         }
-        tdata.data("path", c.path);
-        tdata.data("type", c.type);
+        trow.data("path", c.path);
+        trow.data("type", c.type);
         var checkbox = $('<td><div class="checkbox ff-select"><input type="checkbox" value=""></div></td>');
         trow.append(checkbox);
         trow.append(tdata);
@@ -312,11 +312,27 @@ $(function () {
 
     $("#delete-but").click(function(){
         var selectedNodes = getSelectedNodes();
+/*
         $('#del-node-list').empty();
         $('#del-modal').modal({backdrop: false});
         selectedNodes.forEach(function(n) {
             $('#del-node-list').append('<p>').append(nodeNameWithIcon(n.path,n.type));   
+        });*/
+
+
+        $('#modal-dialog-contents').empty();
+        $('#modal-dialog-contents').append('<div id="modal-dialog-title">Delete</div>');
+        $('#modal-dialog-contents').append('<div id="modal-dialog-body">Permanantally remove these files?</div>');
+        selectedNodes.forEach(function(n) {
+            $('#modal-dialog-body').append('<p>').append(nodeNameWithIcon(n.path,n.type));   
         });
+        $('#modal-dialog-contents').append('<div  id="modal-close-but" class="modal-button">Cancel</div>');    
+        $("#modal-close-but").click(function(){
+            $('body').removeClass("dialog");
+        });
+        $('#modal-dialog-contents').append('<div style="clear:both"></div>');
+        $('body').addClass("dialog");
+
     });
 
     $("#confirm-delete").click(function(){
