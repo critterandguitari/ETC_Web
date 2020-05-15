@@ -206,7 +206,7 @@ function deleteDialog(){
     var selectedNodes = getSelectedNodes(); 
     
     newModal('Delete');
-    addModalBody('Permanantally remove these files?');
+    addModalBody('Permanentamentally remove these files?');
     
     selectedNodes.forEach(function(n) {
         addModalBody($('<p>').append(nodeNameWithIcon(n.path,n.type)));   
@@ -257,10 +257,7 @@ function zipDialog(){
             showModal();
         }
     } 
-    if (!gotaZip){
-        alertDialog('<p>Choose one folder to zip.</p>');   
-    }
-
+    if (!gotaZip) alertDialog('<p>Choose one folder to zip.</p>');   
 }
 
 function unzipDialog(){
@@ -292,9 +289,34 @@ function unzipDialog(){
             showModal();
         }
     } 
-    if (!gotaZip){
-        alertDialog('<p>Choose one .zip file to unzip.</p>');   
-    }
+    if (!gotaZip) alertDialog('<p>Choose one .zip file to unzip.</p>');   
+}
+
+function renameDialog() {
+    var selectedNodes = getSelectedNodes();
+    if (selectedNodes.length == 1) {
+        var path = selectedNodes[0].path;
+        var basename = path.split('/').pop();
+        newModal('Rename');
+        addModalBody('<input type="text" id="rename-node" value="'+basename+'"></input>');
+        addModalButton('Cancel', hideModal);
+        addModalButton('Rename', function(){
+            hideModal();
+            var selectedNodes = getSelectedNodes();
+            n = selectedNodes[0];
+            $.get(fsurl+'?operation=rename_node', { 'path' : n.path, 'name' : $('#rename-node').val() })
+            .done(function () {
+                console.log('renamed 1');
+                refreshWorkingDir();
+            })
+            .fail(function () {
+                console.log('problem moving');
+            });
+            clipboard = {};
+        });
+        showModal();
+    } 
+    else alertDialog('<p>Choose one item to rename.</p>');  
 }
 
 $(function () {
@@ -360,38 +382,7 @@ $(function () {
         });
     });
 
-
-    $("#rename-but").click(function(){
-        $('body').addClass("dialog");
-        var selectedNodes = getSelectedNodes();
-        if (selectedNodes.length == 1) {
-            var path = selectedNodes[0].path;
-            var basename = path.split('/').pop();
-            $('#rename-modal').modal({backdrop: false});
-            $('#rename-text').val(basename);
-
-        } 
-        else {
-            $('#info-modal').modal({backdrop: false});
-            $('#info-modal-msg').empty();   
-            $('#info-modal-msg').append('<p>Choose one item to rename.</p>');   
-        }
-    });
-
-    $("#confirm-rename").click(function(){
-        $('#rename-modal').modal('hide');
-        var selectedNodes = getSelectedNodes();
-        n = selectedNodes[0];
-        $.get(fsurl+'?operation=rename_node', { 'path' : n.path, 'name' : $('#rename-text').val() })
-        .done(function () {
-            console.log('renamed 1');
-        	refreshWorkingDir();
-        })
-        .fail(function () {
-            console.log('problem moving');
-        });
-        clipboard = {};
-    });
+    $("#rename-but").click(renameDialog);
 
     $("#copy-but").click(function(){
         clipboard.operation = "copy";
@@ -430,9 +421,11 @@ $(function () {
 
     // click on file row, excluding input elements
     $('body').on('click', '.fsfile', function(event) {
-            var path=$(this).data("path");
+        var path=$(this).data("path");
+//        if (!target.is("input")) {
  	        console.log('going to get file: ' + path);
             getFile(path);
+  //      }
     });
 
     $.get(fsurl+'?operation=get_node', { 'path' : workingDir})
