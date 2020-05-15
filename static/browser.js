@@ -63,7 +63,7 @@ function nodeNameWithIcon(path, type){
     } else {
         img = "./assets/folder.png";
     }
-    return $('<span class="fname-icon"><img src="'+img+'" width=20/>&nbsp;&nbsp;' + basename + '</span>');
+    return $('<div class="fname-icon"><img src="'+img+'" width=20/></div><div class="fname-name">' + basename + '</div><div style="clear:left;"/>');
 }
 
 function renderFilesTable(d){
@@ -75,7 +75,7 @@ function renderFilesTable(d){
         if (c.type == 'folder'){
             sizeType = 'Folder'
             var trow = $('<tr class="fsdir">');
-            var tdata = $('<td class="fsdirname"><span class="gspacer" /></td>');
+            var tdata = $('<td class="fsdirname"></td>');
             tdata.append(nodeNameWithIcon(c.path, c.type));
         } else {
             sizeType = c.size;
@@ -156,9 +156,9 @@ function pasteCopyDialog(){
     newModal('Copy');
     addModalBody('<p>Copy files: </p>');   
     clipboard.nodes.forEach(function(n) {
-        addModalBody($('<p>').append(nodeNameWithIcon(n.path,n.type)));   
+        addModalBody(nodeNameWithIcon(n.path,n.type));   
     });       
-    addModalBody('<p> <br /> to current folder?</p>');   
+    addModalBody('<p>to current folder?</p>');   
     addModalButton('Cancel', hideModal)
     addModalButton('Paste', function(){
         hideModal();
@@ -181,9 +181,9 @@ function pasteMoveDialog(){
     newModal('Move');
     addModalBody('<p>Move files: </p>');   
     clipboard.nodes.forEach(function(n) {
-        addModalBody($('<p>').append(nodeNameWithIcon(n.path,n.type)));  
+        addModalBody(nodeNameWithIcon(n.path,n.type));  
     });       
-    addModalBody('<p> <br />to current folder?</p>');  
+    addModalBody('<p>to current folder?</p>');  
     addModalButton('Cancel', hideModal);
     addModalButton('Move',  function(){
         hideModal();
@@ -205,29 +205,32 @@ function pasteMoveDialog(){
 function deleteDialog(){
     var selectedNodes = getSelectedNodes(); 
     
-    newModal('Delete');
-    addModalBody('Permanentamentally remove these files?');
-    
-    selectedNodes.forEach(function(n) {
-        addModalBody($('<p>').append(nodeNameWithIcon(n.path,n.type)));   
-    });
-
-    addModalButton('Cancel', hideModal);
-    addModalButton('Delete', function(){
-        hideModal();
-        var selectedNodes = getSelectedNodes();
+    if (selectedNodes.length > 0) {
+        newModal('Delete');
+        addModalBody('<p>Permanentamentally remove these files?</p>');
+        
         selectedNodes.forEach(function(n) {
-            $.get(fsurl+'?operation=delete_node', { 'path' : n.path })
-            .done(function () {
-                console.log('deleted 1');
-                refreshWorkingDir();
-            })
-            .fail(function () {
-                console.log('problem deleting');
+            addModalBody(nodeNameWithIcon(n.path,n.type));   
+        });
+
+        addModalButton('Cancel', hideModal);
+        addModalButton('Delete', function(){
+            hideModal();
+            var selectedNodes = getSelectedNodes();
+            selectedNodes.forEach(function(n) {
+                $.get(fsurl+'?operation=delete_node', { 'path' : n.path })
+                .done(function () {
+                    console.log('deleted 1');
+                    refreshWorkingDir();
+                })
+                .fail(function () {
+                    console.log('problem deleting');
+                });
             });
         });
-    });
-    showModal();
+        showModal();
+    }
+    else alertDialog("Choose one or more files to delete.");
 }
 
 function zipDialog(){
@@ -319,6 +322,36 @@ function renameDialog() {
     else alertDialog('<p>Choose one item to rename.</p>');  
 }
 
+function newFolderDialog() {
+    newModal('New Folder');
+    addModalBody('<input type="text" id="new-folder-name" value="Untitled"></input>');
+    addModalButton('Cancel', hideModal);
+    addModalButton('New Folder', function(){
+        hideModal();
+        $.get(fsurl+'?operation=create_node', { 'path' : workingDir, 'name' : $('#new-folder-name').val() })
+        .done(function () {
+            console.log('created 1');
+        	refreshWorkingDir();
+        })
+        .fail(function () {
+            console.log('problem creating folder');
+        });
+    });
+    showModal();
+}
+
+function openFileDialog(path) {
+    newModal('Open File');
+    addModalBody('Are you sure you want to open this file? Unsaved changes to the current file will be lost!');
+    addModalButton('Cancel', hideModal);
+    addModalButton('Open', function () {
+        hideModal();
+        console.log('going to get file: ' + path);
+        getFile(path);
+    });
+    showModal();
+}
+
 $(function () {
 
     $('#fileupload').fileupload({
@@ -336,16 +369,20 @@ $(function () {
         },
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .progress-bar').css(
+            $('#progress-bar-progress').css(
                 'width',
                 progress + '%'
             );
         }
     }).prop('disabled', !$.support.fileInput)
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
-    $('#fileupload').bind('fileuploadstart', function (e) {$('#upload-modal').modal({backdrop: false});});
+    $('#fileupload').bind('fileuploadstart', function (e) {
+        newModal('Uploading...');
+        addModalBody('<div id="progress-bar"><div id="progress-bar-progress"></div></div>');
+        showModal();
+    });
     $('#fileupload').bind('fileuploadstop', function (e, data) {
-        $('#upload-modal').modal('hide');
+        hideModal();
         refreshWorkingDir()
         console.log(data);
     });
@@ -366,21 +403,8 @@ $(function () {
         refreshWorkingDir();
     });
 
-    $("#new-folder-but").click(function(){
-        $('#new-folder-modal').modal({backdrop: false});
-    });
+    $("#new-folder-but").click(newFolderDialog);
 
-    $("#confirm-new-folder").click(function(){
-        $('#new-folder-modal').modal('hide');
-        $.get(fsurl+'?operation=create_node', { 'path' : workingDir, 'name' : $('#new-folder-name').val() })
-        .done(function () {
-            console.log('created 1');
-        	refreshWorkingDir();
-        })
-        .fail(function () {
-            console.log('problem creating folder');
-        });
-    });
 
     $("#rename-but").click(renameDialog);
 
@@ -421,11 +445,11 @@ $(function () {
 
     // click on file row, excluding input elements
     $('body').on('click', '.fsfile', function(event) {
-        var path=$(this).data("path");
-//        if (!target.is("input")) {
- 	        console.log('going to get file: ' + path);
-            getFile(path);
-  //      }
+        var target = $(event.target);
+        if (!target.is("input")) {
+            var path=$(this).data("path");
+            openFileDialog(path);
+        }
     });
 
     $.get(fsurl+'?operation=get_node', { 'path' : workingDir})
