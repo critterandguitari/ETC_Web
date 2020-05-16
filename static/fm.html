@@ -111,9 +111,6 @@
         .breadcrumb li {
             cursor: pointer;
             text-decoration: none;
-            background-color: #444;
-            padding: 4px;
-            margin: 2px;
             overflow: hidden;
            float:left;
         }
@@ -132,6 +129,11 @@
             overflow: hidden;
         }
         .mode-button:hover {color:#FF00FF;}
+        
+        #files-table {
+            margin-top:6px;
+        }
+
         /* Start by setting display:none to make this hidden.
            Then we position it in relation to the viewport window
            with position:fixed. Width, height, top and left speak
@@ -187,7 +189,6 @@
         }
         .modal-button:hover {background-color:#666;}
 
-
         /* When the body has the loading class, we turn
            the scrollbar off with overflow:hidden */
         body.loading {
@@ -233,9 +234,9 @@
         <br/>
     
         <div id="control-panel">
-            <div id="sd-sel-but" class="side-button">SD Card</div>
+            <!--div id="sd-sel-but" class="side-button">SD Card</div>
             <div id="usb-sel-but" class="side-button">USB Drive</div>
-            <div style="clear:left;"></div>
+            <div style="clear:left;"></div-->
             <div id="cut-but"  class="side-button">Cut</div>
             <div id="copy-but" class="side-button">Copy</div>
             <div  id="paste-but" class="side-button">Paste</div>

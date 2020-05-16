@@ -1,7 +1,7 @@
 var appBaseURL = 'http://' + location.host
 var fsurl = appBaseURL + '/fmdata'
 var workingDir = '/sdcard/';
-var baseDirLabel = 'SD Card';
+var baseDirLabel = 'Home';
 var clipboard = {};
 
 function refreshWorkingDir(){
@@ -108,8 +108,8 @@ function renderBreadcrumb () {
     path.forEach(function(p) {
         if (p) {
             absPath +=  p + '/';
-            if (count == 0) var breadelement = $('<li class="fsdir">' + baseDirLabel + '</li>');
-            else var breadelement = $('<li class="fsdir">' + p + '</li>');
+            if (count == 0) var breadelement = $('<li class="fsdir">' + baseDirLabel + '/</li>');
+            else var breadelement = $('<li class="fsdir">' + p + '/</li>');
             count++;
             breadelement.data("path", absPath);
             $("#fsbreadcrumb").append(breadelement);
